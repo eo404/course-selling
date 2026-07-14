@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const userSchema = new moongoose.Schema (
+const adminSchema = new moongoose.Schema (
     {
         name:{
             type:String,
@@ -18,5 +18,5 @@ const userSchema = new moongoose.Schema (
     },{timestamps : true}
 );
 
-const User = mongoose.model('User',userSchema);
-export default User;
+const admin = mongoose.model('Admin',adminSchema);
+export default admin;
