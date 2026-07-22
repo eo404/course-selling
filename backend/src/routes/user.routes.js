@@ -1,4 +1,4 @@
-import {Routes} from "express";
+import {Router} from "express";
 import userSchema from "../validations/user.validation.js"
 
 const router = Router();

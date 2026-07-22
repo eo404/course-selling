@@ -1,12 +1,11 @@
-import {Router} from "express";
+import { Router } from "express";
+import validate from "../middleware/validate.middleware.js";
+import { adminRegisterSchema, adminLoginSchema } from "../validations/admin.validation.js";
+import { registerAdmin, loginAdmin } from "../controllers/admin.controller.js";
 
 const router = Router();
 
-app.post("/Login",(req,res)=>{
-    const name = req.body.name;
-    const email = req.body.email;
-    const password = req.body.password;
-    
-});
+router.post("/register", validate(adminRegisterSchema), registerAdmin);
+router.post("/login", validate(adminLoginSchema), loginAdmin);
 
-export default app;
+export default router;
