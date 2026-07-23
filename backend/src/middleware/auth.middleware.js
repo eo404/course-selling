@@ -9,7 +9,7 @@ export const verifyToken = (req,res,next)=>{
     {
         return res.status(401).json(
             {
-                message:"Unathorized"
+                message:"Unauthorized"
             }
         )
     }
@@ -28,4 +28,27 @@ export const verifyToken = (req,res,next)=>{
             }
         )
     }
+};
+
+export const requireRole = (role) => {
+    return (req,res,next)=>{
+
+        if(!req.user)
+        {
+            return res.status(401).json({
+                message: "Unauthorized"
+            });
+        }
+
+        const userRole  = req.user.role
+        if(userRole !== role)
+        {
+            return res.status(403).json({
+                message: "Forbidden"
+            })
+        }
+
+        next();
+
+    };
 };
