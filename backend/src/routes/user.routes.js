@@ -1,27 +1,27 @@
-import {Router} from "express";
-import userSchema from "../validations/user.validation.js"
+import express from "express";
 
-const router = Router();
+import validate from "../middleware/validate.middleware.js";
+import {
+  userSchema,
+  userLoginSchema,
+} from "../validations/user.validation.js";
+import {
+  registerUser,
+  loginUser,
+} from "../controllers/user.controller.js";
 
+const router = express.Router();
 
-router.post("/api/userSignUp",async(req,res)=>{
-    try
-    {
-        const result  = userSchema.safeParse(req.body);
-        if(!result.success)
-        {
-            return res.status(404).json(
-                {
-                    message:"Validation Failed",
-                    error: result.error.issues
-                }
-            );
-        };
-        const {username,email,password} = result.data;
-    }
-    catch(error)
-    {
-        console.error(error);
-        return res.status(500).json({ message: "Internal server error" });
-    }
-});
+router.post(
+  "/register",
+  validate(userSchema),
+  registerUser
+);
+
+router.post(
+  "/login",
+  validate(userLoginSchema),
+  loginUser
+);
+
+export default router;
