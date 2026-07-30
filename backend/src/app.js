@@ -1,6 +1,8 @@
 import express from "express";
 import adminRouter from "./routes/admin.routes.js";
 import userRouter from "./routes/user.routes.js";
+import courseRouter from "./routes/course.routes.js";
+import enrollmentRouter from "./routes/enrollment.routes.js";
 
 const app = express();
 
@@ -14,5 +16,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/admin", adminRouter);
 app.use("/api/users", userRouter);
+app.use("/api/courses", courseRouter);
+app.use("/api/enrollments", enrollmentRouter);
 
 export default app;
